@@ -22,7 +22,6 @@ class OpenMeteApi:
 
     async def forecats(self, city: str) -> list[Probe]:
         lat, lon = self._get_city_coordinates(city)
-        # TODO: refactore on singe session
         async with ClientSession() as session:
             url = f"{self.url}?latitude={lat}&longitude={lon}&hourly=temperature_2m,windspeed_10m"
             async with session.get(url=url) as resp:
@@ -32,6 +31,3 @@ class OpenMeteApi:
                                             res["hourly"]["windspeed_10m"]):
                     result.append(Probe(time=time, temperature=temp, wind_speed=wind))
                 return result
-
-    async def historical_information(self):
-        ...
