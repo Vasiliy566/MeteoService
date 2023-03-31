@@ -1,3 +1,5 @@
+from typing import Any
+
 import pytest
 from aioresponses import aioresponses
 
@@ -10,6 +12,6 @@ def test_config() -> Config:
 
 
 @pytest.fixture
-def mocked():
+def mocked() -> Any:
     with aioresponses() as m:
         yield m
